@@ -1,0 +1,4 @@
+{
+  "name": "ai-builds",
+  "description": "Two skills from the AI builds videos: convert a PDF with Docling, and check that invoice lines add up to the order total."
+}

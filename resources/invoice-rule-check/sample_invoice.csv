@@ -1,0 +1,4 @@
+kind,description,amount
+invoice_line,Sample item A (fictional),54.00
+invoice_line,Sample item B (fictional),29.00
+order_total,Sample order (fictional),83.00

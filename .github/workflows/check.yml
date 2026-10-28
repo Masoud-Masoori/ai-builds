@@ -1,0 +1,21 @@
+name: check
+
+on:
+  push:
+  schedule:
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install pytest
+        run: python3 -m pip install pytest==8.3.3
+      - name: Check resources (including links)
+        run: python3 scripts/check_resources.py --online
+      - name: Run tests
+        run: python3 -m pytest -q

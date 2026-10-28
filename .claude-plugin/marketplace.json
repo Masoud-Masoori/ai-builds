@@ -1,0 +1,13 @@
+{
+  "name": "ai-builds",
+  "description": "Skills that go with the AI builds videos by Masoud Masoori.",
+  "owner": {
+    "name": "Masoud Masoori"
+  },
+  "plugins": [
+    {
+      "name": "ai-builds",
+      "source": "./plugins/ai-builds"
+    }
+  ]
+}
