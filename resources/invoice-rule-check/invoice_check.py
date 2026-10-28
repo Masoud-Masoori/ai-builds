@@ -47,24 +47,40 @@ def to_cents(text, row_number):
     return value.quantize(CENT, rounding=ROUND_HALF_UP)
 
 
+def read_rows(path):
+    """Return the header and the rows. Any unreadable file becomes an InputError."""
+    try:
+        # utf-8-sig drops the byte order mark that Excel's "CSV UTF-8" adds.
+        with open(path, newline="", encoding="utf-8-sig") as handle:
+            reader = csv.DictReader(handle)
+            fieldnames = reader.fieldnames
+            return fieldnames, list(reader)
+    except UnicodeDecodeError:
+        raise InputError("file is not valid UTF-8 text; save it as CSV UTF-8 and try again")
+    except csv.Error as error:
+        raise InputError(f"file is not a readable CSV: {error}")
+
+
 def check_file(path):
-    with open(path, newline="", encoding="utf-8") as handle:
-        reader = csv.DictReader(handle)
-        if not reader.fieldnames:
-            raise InputError("file is empty")
-        missing = [c for c in REQUIRED if c not in reader.fieldnames]
-        if missing:
-            raise InputError("missing column(s): " + ", ".join(missing))
-        lines = []
-        totals = []
-        for number, row in enumerate(reader, start=2):
-            kind = (row.get("kind") or "").strip()
-            if kind == "invoice_line":
-                lines.append(to_cents(row.get("amount") or "", number))
-            elif kind == "order_total":
-                totals.append(to_cents(row.get("amount") or "", number))
-            elif kind:
-                raise InputError(f"row {number}: unknown kind {kind!r}")
+    fieldnames, rows = read_rows(path)
+    if not fieldnames:
+        raise InputError("file is empty")
+    missing = [c for c in REQUIRED if c not in fieldnames]
+    if missing:
+        raise InputError("missing column(s): " + ", ".join(missing))
+    lines = []
+    totals = []
+    for number, row in enumerate(rows, start=2):
+        kind = (row.get("kind") or "").strip()
+        amount = row.get("amount") or ""
+        if kind == "invoice_line":
+            lines.append(to_cents(amount, number))
+        elif kind == "order_total":
+            totals.append(to_cents(amount, number))
+        elif kind:
+            raise InputError(f"row {number}: unknown kind {kind!r}")
+        elif amount.strip():
+            raise InputError(f"row {number}: has an amount but no kind (use invoice_line or order_total)")
     if not lines:
         raise InputError("no invoice_line rows found")
     if len(totals) != 1:

@@ -98,3 +98,55 @@ def test_cli_exit_codes(tmp_path):
     empty = write(tmp_path, "")
     r = subprocess.run([sys.executable, str(HERE / "invoice_check.py"), str(empty)], capture_output=True, text=True)
     assert r.returncode == 2
+
+
+HEADER = "kind,description,amount\n"
+
+
+def run_cli(path):
+    return subprocess.run([sys.executable, str(HERE / "invoice_check.py"), str(path)], capture_output=True, text=True)
+
+
+def test_cp1252_file_is_input_error(tmp_path):
+    # A spreadsheet "CSV" saved in the Windows code page: e-acute is the single byte 0xE9, not valid UTF-8.
+    p = tmp_path / "inv.csv"
+    p.write_bytes((HEADER + "invoice_line,Caf\u00e9,1.00\norder_total,Order,1.00\n").encode("cp1252"))
+    with pytest.raises(ic.InputError, match="UTF-8"):
+        ic.check_file(p)
+    r = run_cli(p)
+    assert r.returncode == 2
+    assert "UTF-8" in r.stderr
+    assert "Traceback" not in r.stderr
+
+
+def test_utf8_bom_file_passes(tmp_path):
+    # Excel's "CSV UTF-8" writes a byte order mark; it must not hide the first column name.
+    p = tmp_path / "inv.csv"
+    p.write_bytes(b"\xef\xbb\xbf" + (HEADER + "invoice_line,A,1.00\norder_total,Order,1.00\n").encode("utf-8"))
+    assert ic.check_file(p).passed
+    r = run_cli(p)
+    assert r.returncode == 0
+    assert r.stdout.startswith("PASS")
+
+
+def test_blank_kind_with_amount_is_input_error(tmp_path):
+    # A row that carries money but no kind must not be skipped silently.
+    p = write(tmp_path, HEADER + "invoice_line,A,1.00\n,Forgotten line,5.00\norder_total,Order,1.00\n")
+    with pytest.raises(ic.InputError, match="row 3"):
+        ic.check_file(p)
+    assert run_cli(p).returncode == 2
+
+
+def test_blank_kind_without_amount_is_ignored(tmp_path):
+    p = write(tmp_path, HEADER + "invoice_line,A,1.00\n,,\norder_total,Order,1.00\n")
+    assert ic.check_file(p).passed
+
+
+def test_malformed_csv_is_input_error(tmp_path):
+    # A field longer than the csv module's limit raises csv.Error.
+    p = write(tmp_path, HEADER + "invoice_line," + "x" * 200000 + ",1.00\norder_total,Order,1.00\n")
+    with pytest.raises(ic.InputError, match="CSV"):
+        ic.check_file(p)
+    r = run_cli(p)
+    assert r.returncode == 2
+    assert "Traceback" not in r.stderr

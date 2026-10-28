@@ -46,12 +46,12 @@ tests/test_check_resources.py  tests for the checker
 
 ## DM texts
 
-DM texts live in DM-REPLIES.md, not in the video folders. They are drafts; every send needs the owner's approval.
+DM texts live in DM-REPLIES.md, not in the video folders. They are drafts, sent by hand, one at a time.
 
 ## Choices where the docs left a detail UNKNOWN
 
 - The plugin sits in `plugins/ai-builds/` and the marketplace entry uses the source `./plugins/ai-builds`. This follows the documented example layout (`./plugins/my-first-plugin`). Whether a plugin at the repository root with source `./` is accepted was not confirmed in the docs read, so it was not used.
 - The skills are in `plugins/ai-builds/skills/<name>/SKILL.md` (documented layout, one folder per skill). The marketplace entry does not list skills separately; the plugin loads them from `skills/`.
 - Skill `name` and `description` are both written, and kept short (description under 200 characters) so they also fit the claude.ai help article's stated limits (name 64, description 200), even though the Claude Code docs read did not show those limits for Claude Code.
-- The plugin and marketplace carry no version and no author: not required by the docs read. The local validator (`claude plugin validate`) passed with warnings about exactly those fields.
-- The GitHub account and repository name used in links (`Masoud-Masoori/ai-builds`) come from the owner's brief. Until a repository exists under that name, `--online` link checks of those links will fail.
+- The plugin sets an author in `plugin.json`, and the marketplace sets an owner. Neither carries a version, which the docs read did not require. The local validator (`claude plugin validate .`) passes and warns only that no version is specified.
+- The GitHub account and repository name used in links (`Masoud-Masoori/ai-builds`) are the intended public location. Until a repository exists under that name, `--online` link checks of those links will fail.

@@ -33,7 +33,7 @@ def make_repo(root: Path) -> Path:
     }
     (root / ".claude-plugin" / "marketplace.json").write_text(json.dumps(market), encoding="utf-8")
     (root / "DM-REPLIES.md").write_text(
-        "Drafts. Each send needs the owner's approval.\n\n"
+        "Drafts. Sent by hand, one at a time.\n\n"
         "https://github.com/Someone/repo/tree/main/resources/demo\n",
         encoding="utf-8",
     )

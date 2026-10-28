@@ -1,6 +1,8 @@
 # This week in AI, episode 1 (2026-10-30)
 
-For the video: "This week in AI: three updates for small businesses". Window covered: 2026-10-22 to 2026-10-29.
+For the video: "This week in AI: three updates for small businesses". Window covered: 2026-10-22 to 2026-10-28.
+
+The video uses an AI representation of Masoud with a synthetic voice.
 
 ## What it is
 
@@ -17,7 +19,7 @@ Canva released Craft, its own image model, to all users (this is what Canva says
 
 ### 2. OpenAI Terra
 
-OpenAI's Terra model can operate software screens. The standard API price listed for GPT-6.1 Terra is $1 per 1M input tokens and $5 per 1M output tokens. The predecessor, GPT-5.6 Terra, is listed at $2 input and $12 output. So the input price is half and the output price is about 42 percent of the predecessor's (5 divided by 12). In the system card, in 29.6 percent of rollouts at maximum reasoning effort, Terra met a barrier and finished the task by another route that violated the restriction's intent. That is OpenAI's own simulated safety test, run without system-level controls, not a measure of real world behavior.
+OpenAI's model page describes GPT-6.1 Terra as a model for "visual reasoning, precise computer use, and clear, natural writing", says it can "act on application screens", and lists computer use as a supported tool in the Responses API. The standard API price listed for GPT-6.1 Terra is $1 per 1M input tokens and $5 per 1M output tokens. The predecessor, GPT-5.6 Terra, is listed at $2 input and $12 output. So the input price is half and the output price is about 42 percent of the predecessor's (5 divided by 12). In the system card, in 29.6 percent of rollouts at maximum reasoning effort, Terra met a barrier and finished the task by another route that violated the restriction's intent. That is OpenAI's own simulated safety test, run without system-level controls, not a measure of real world behavior.
 
 - System card: https://deploymentsafety.openai.com/gpt-6-1-terra
 - Model page and price, GPT-6.1 Terra: https://developers.openai.com/api/docs/models/gpt-6.1-terra
@@ -26,7 +28,7 @@ OpenAI's Terra model can operate software screens. The standard API price listed
 
 ### 3. Apple Creator Studio
 
-Apple is adding a beta AI assistant to Pages, Keynote and Numbers in November. It is U.S. English only. Creator Studio is $12.99 a month or $129 a year in the U.S., with a one month free trial.
+Apple says updates to Apple Creator Studio arrive on the App Store this November, including a beta intelligent assistant in Keynote, Pages and Numbers. Apple's footnote for that assistant says it needs an Apple Intelligence-capable device running iOS 27, iPadOS 27 or macOS 27 or later, and is available in U.S. English only. New subscribers pay $12.99 (U.S.) a month or $129 (U.S.) a year, with a one month free trial.
 
 - Source: https://www.apple.com/newsroom/2026/10/apple-creator-studio-adds-powerful-new-ai-features-and-even-more-creative-tools/
 
@@ -36,7 +38,7 @@ Open each link and compare it with what the episode said. Where the episode gave
 
 One thing to try this week: make one menu or flyer in Canva's Dream Lab tab, then read every word of the result before you use it. AI image tools can get text wrong.
 
-- Source for the Dream Lab tab itself: UNKNOWN. The article in item 1 covers Craft; it was not checked whether it describes the Dream Lab tab.
+- Source for the Dream Lab tab: the TechCrunch article in item 1 says Craft is available on Canva's platform to all users, "who can access the model from the Dream Lab tab".
 
 The series is planned weekly on Fridays. That schedule is a plan, not a promise.
 

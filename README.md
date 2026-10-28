@@ -53,10 +53,12 @@ Source: https://code.claude.com/docs/en/skills (retrieved 2026-10-28).
 
 ### Route 3: upload to claude.ai
 
-1. Download or zip the skill folder (for example `docling-convert`). The folder must be the root of the ZIP, not a subfolder, and its name must match the skill name.
+1. Download this repository as a ZIP from GitHub and unzip it. Then zip only one skill folder, for example `plugins/ai-builds/skills/invoice-rule-check`, so that the folder `invoice-rule-check` is the top item inside your new ZIP, with `SKILL.md` inside it. Do not upload the whole repository ZIP. The folder name must match the skill name. The support article's example is `my-skill.zip` containing `my-skill/` with the skill file and any extra folders inside it.
 2. In claude.ai go to Customize, then Skills.
 3. Click the + button, then + Create skill, then Upload a skill.
 4. Upload the ZIP.
+
+`invoice-rule-check` is the skill to upload to claude.ai. `docling-convert` is for Claude Code on your own machine (Route 1 or 2): it installs a large Python package, and your documents stay on your computer.
 
 Custom skills are available on Free, Pro, Max, Team and Enterprise plans, and need code execution to be enabled. On Team and Enterprise an owner can turn skill creation off. Whether claude.ai needs the file named `SKILL.md` (as in Claude Code) or `skill.md` (as the support article writes it) is UNKNOWN; if the upload says the file is missing, try the other spelling. Whether claude.ai accepts a GitHub repo directly as a skill source is also UNKNOWN; only ZIP upload is documented.
 

@@ -2,6 +2,8 @@
 
 For the video: "Use a rule, not AI".
 
+The video uses an AI representation of Masoud with a synthetic voice.
+
 ## What it is
 
 A short Python script that adds up the line items on an invoice and compares the result to the order total. It prints `PASS` or `MISMATCH` and the difference.
@@ -12,7 +14,7 @@ Files in this folder:
 
 - `invoice_check.py`: the rule. Python standard library only, nothing to install.
 - `sample_invoice.csv`: a fictional sample. Two lines, 54.00 and 29.00, and an order total of 83.00. It is sample data, not a client.
-- `test_invoice_check.py`: tests (a match, a mismatch, rounding to cents, an empty file and other bad input).
+- `test_invoice_check.py`: tests (a match, a mismatch, rounding to cents, an empty file, a byte order mark, a non-UTF-8 file, a malformed CSV and other bad input).
 
 What the rule does: it reads amounts with Decimal instead of floats (so 0.10 plus 0.20 is exactly 0.30), rounds every amount to cents (half up), sums the invoice lines and compares the sum to the order total.
 
@@ -32,7 +34,7 @@ Expected output for the sample:
 PASS: lines add up to 83.00, order total 83.00
 ```
 
-Exit code 0 means PASS, 1 means MISMATCH (the output shows the difference, lines minus order total), 2 means the file could not be checked (empty, missing columns, a value that is not a number, no order total).
+Exit code 0 means PASS, 1 means MISMATCH (the output shows the difference, lines minus order total), 2 means the file could not be checked (empty, not UTF-8 text, not a readable CSV, missing columns, a row with an amount but no kind, a value that is not a number, no order total).
 
 CSV format, with a header row:
 
