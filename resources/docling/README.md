@@ -18,7 +18,7 @@ Not affiliated with the Docling project. Prepared by MAS-AI Technologies.
 
 Requirements: Python 3.10 or higher. Works on macOS, Linux and Windows (x86_64 and arm64). On an Intel Mac, install with `pip install "docling[mac_intel]"` instead of plain `pip install docling`, because newer PyTorch versions no longer provide wheels for Intel Macs; the install page says this needs Python 3.12 or lower.
 
-What to expect (from the maintainer's run on Windows 11, Python 3.11.9, CPU only): installing took about 10 minutes (579 seconds), the virtual environment used about 1.5 GB, and the first conversion downloaded about 530 MB of models. Plan for about 2 GB of free disk. A warm conversion of the digital PDF took about 19 seconds; the 110 dpi scan took about 38 seconds.
+What to expect (from my run on Windows 11, Python 3.11.9, CPU only): installing took about 10 minutes (579 seconds), the virtual environment used about 1.5 GB, and the first conversion downloaded about 530 MB of models. Plan for about 2 GB of free disk. A warm conversion of the digital PDF took about 19 seconds; the 110 dpi scan took about 38 seconds.
 
 Install (official command):
 
@@ -34,7 +34,7 @@ Convert a file from the command line:
 docling invoice.pdf --to md --to json --output out
 ```
 
-The official CLI example is `docling <url-or-path>`. The `--to` and `--output` options above come from the maintainer's own test run; check `docling --help` if they differ on your version.
+The official CLI example is `docling <url-or-path>`. The `--to` and `--output` options above come from my own test run; check `docling --help` if they differ on your version.
 
 Minimal official Python example (structure as on the quickstart page; if it differs from the live docs, trust the docs):
 
@@ -81,7 +81,7 @@ Never ask me for passwords, tokens or API keys. Do not upload my file anywhere. 
 
 ## Limits
 
-- The maintainer's test: one fictional English invoice. A blurry, tilted scan at 55 dpi came back with no text and no table rows, with exit code zero and no error. That is a silent failure, which is why the check above matters.
+- My test: one fictional English invoice. A blurry, tilted scan at 55 dpi came back with no text and no table rows, with exit code zero and no error. That is a silent failure, which is why the check above matters.
 - Not tested: multi page contracts, handwriting, non English documents, rotated tables, GPU.
 - Test machine: Windows 11, Python 3.11.9, CPU only. Your times will differ.
 - The test used version 2.142.1. Newer versions exist and were not re-tested.
@@ -93,4 +93,4 @@ Never ask me for passwords, tokens or API keys. Do not upload my file anywhere. 
 - Latest release v2.144.0: https://github.com/docling-project/docling/releases/latest and https://pypi.org/pypi/docling/2.144.0/json , retrieved 2026-10-28.
 - Install page (platforms, Intel Mac section with `pip install "docling[mac_intel]"` and the Python 3.12 or lower note): https://docling-project.github.io/docling/getting_started/installation/ , retrieved 2026-10-28.
 - Quickstart (Python example, CLI example): https://docling-project.github.io/docling/getting_started/quickstart/ , retrieved 2026-10-28.
-- Install time, disk use, model download, timings, accuracy and the 55 dpi failure: the maintainer's own test run on 2026-10-28 with docling 2.142.1. There is no public link for it.
+- Install time, disk use, model download, timings, accuracy and the 55 dpi failure: my own test run on 2026-10-28 with docling 2.142.1. There is no public link for it.
